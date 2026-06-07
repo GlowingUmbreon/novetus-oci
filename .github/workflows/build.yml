@@ -19,6 +19,7 @@ jobs:
           AWS_EC2_METADATA_DISABLED: "true"
         run: |
           aws --endpoint-url "${{ secrets.S3_URL }}" --no-verify-ssl s3 cp "s3://${{ secrets.S3_BUCKET }}/novetus-data.tar.gz" novetus-data.tar.gz
+          mkdir -p novetus
           tar -xzf novetus-data.tar.gz -C novetus
           rm novetus-data.tar.gz
 
