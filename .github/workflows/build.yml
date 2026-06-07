@@ -1,0 +1,34 @@
+name: Build and push image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch novetus data
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_KEY }}
+          AWS_EC2_METADATA_DISABLED: "true"
+        run: |
+          aws --endpoint-url "${{ secrets.S3_URL }}" --no-verify-ssl s3 cp "s3://${{ secrets.S3_BUCKET }}/novetus-data.tar.gz" novetus-data.tar.gz
+          tar -xzf novetus-data.tar.gz -C novetus
+          rm novetus-data.tar.gz
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Build image
+        run: docker build -t "ghcr.io/${{ github.repository }}:latest" -t "ghcr.io/${{ github.repository }}:${{ github.sha }}" .
+
+      - name: Push image
+        run: |
+          docker push "ghcr.io/${{ github.repository }}:latest"
+          docker push "ghcr.io/${{ github.repository }}:${{ github.sha }}"
