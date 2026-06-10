@@ -21,7 +21,7 @@ WINEDEBUG=-all wine ~/novetus/bin/Novetus.exe \
         -headless \
         -no3d \
         -client "$NOVETUS_CLIENT" \
-        -map "Z:\\\\opt\\\\$NOVETUS_PLACE" \
+        -map "Z:\\\\opt\\\\place.rbxl" \
         -hostport $NOVETUS_PORT \
         -maxplayers $NOVETUS_PLAYERS \
         -serverbrowsername "$NOVETUS_NAME" \

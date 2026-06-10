@@ -1,8 +1,8 @@
 FROM archlinux:latest
-LABEL Name=novetus Version=0.0.1
+LABEL Name=novetus Version=0.0.2
 
 # Use local pacman cache
-#RUN echo "Server = http://127.0.0.1:9129/repo/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+RUN echo "Server = http://127.0.0.1:9129/repo/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 RUN pacman -Syu -q --noconfirm wine wine-mono sway wayvnc strace
 # Remove nice capabilities from sway binary to ensure compatibility with containers
 RUN setcap -r /usr/bin/sway
@@ -21,9 +21,8 @@ ENV NOVETUS_CLIENT="2012M" \
     NOVETUS_PLAYERS=9 \
     NOVETUS_NAME="NAME - YEAR" \
     NOVETUS_PORT=10000 \
-    NOVETUS_PLACE=place.rbxl \
     NOVETUS_MASTERSERVER=""
 
-VOLUME /opt/place
+VOLUME /opt/place.rbxl
 EXPOSE 5900
 ENTRYPOINT ["/opt/entry.sh"]

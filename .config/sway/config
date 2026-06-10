@@ -1,4 +1,7 @@
-output HEADLESS-1 mode 1920x1080
+set $mod Mod1
+output HEADLESS-1 mode 16x16
+bindsym $mod+f11 output HEADLESS-1 mode 16x16
+bindsym $mod+f12 output HEADLESS-1 mode 1920x1080
 
 # Default config for sway
 #
@@ -8,8 +11,6 @@ output HEADLESS-1 mode 1920x1080
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
-set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
