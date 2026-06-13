@@ -13,7 +13,10 @@ RUN useradd -m -u 1000 novetus
 RUN mkdir -p -m 0700 /run/user/1000 && chown novetus:novetus /run/user/1000
 
 USER novetus
-RUN WINEDEBUG=-all wineboot --init && winecfg /v winxp && wineserver -w
+RUN WINEDEBUG=-all wineboot --init 
+RUN winecfg /v winxp 
+RUN wine reg add "HKCU\\Software\\Wine\\Drivers" /v Audio /d "null" 
+RUN wineserver -w
 COPY --chown=novetus:novetus .config /home/novetus/.config
 COPY --chown=novetus:novetus novetus/data /home/novetus/novetus
 
