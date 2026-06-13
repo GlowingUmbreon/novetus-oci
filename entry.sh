@@ -13,9 +13,7 @@ wayvnc &
 wineserver -p
 
 #Start Novetus
-wine reg add "HKCU\\Software\\Wine\\Drivers" /v Audio /d "null" /f 1>/dev/null
-export SDL_AUDIODRIVER=dummy
-WINEDEBUG=-all wine ~/novetus/bin/Novetus.exe \
+SDL_AUDIODRIVER=dummy WINEDEBUG=-all wine ~/novetus/bin/Novetus.exe \
         -load server \
         -cmdonly \
         -headless \
