@@ -10,9 +10,8 @@ export WAYLAND_DISPLAY=wayland-1
 
 # Start dependencies
 wayvnc &
-wineserver -p
 
-#Start Novetus
+# Start Novetus
 SDL_AUDIODRIVER=dummy WINEDEBUG=-all wine ~/novetus/bin/Novetus.exe \
         -load server \
         -cmdonly \
