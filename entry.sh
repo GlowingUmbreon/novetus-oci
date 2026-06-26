@@ -25,6 +25,5 @@ SDL_AUDIODRIVER=dummy WINEDEBUG=-all wine ~/novetus/bin/Novetus.exe \
         -serverbrowseraddress "$NOVETUS_MASTERSERVER"
 
 # Cleanup upon exit
-echo "Waiting for wineserver to close"
-wineserver -w
-echo "Exited"
+wineserver -k
+exit 1
