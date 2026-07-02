@@ -32,4 +32,4 @@ EXPOSE 5900
 ENTRYPOINT ["/opt/entry.sh"]
 
 # Make sure that RobloxApp is running, and if not then reboot the container.
-HEALTHCHECK CMD ["pgrep",  "RobloxApp_serv"]
+#HEALTHCHECK CMD ["pgrep",  "RobloxApp_serv"]
